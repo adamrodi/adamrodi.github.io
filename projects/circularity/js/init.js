@@ -32,10 +32,7 @@ var init = function (window) {
         }
 
         // TODO 3 / 8 : Call the drawCircle() function 
-        for(var i = 0; i <= 100; i++){
-            drawCircle();
-        }
-
+        
 
         ////////////////////////////////////////////////////////////
         ///////////////// PROGRAM LOGIC ////////////////////////////
@@ -93,9 +90,10 @@ var init = function (window) {
                 circle.y = 0;
             }
             // TODO 7 : YOUR CODE STARTS HERE //////////////////////
-            
-
-
+            for(var i = 0; i <= 100; i++){
+                drawCircle();
+            }
+    
             // YOUR TODO 7 CODE ENDS HERE //////////////////////////
         }
         
