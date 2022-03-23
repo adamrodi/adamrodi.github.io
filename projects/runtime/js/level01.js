@@ -24,9 +24,9 @@ var level01 = function (window) {
                 { "type": "enemy", "x": 700, "y": groundY - 50},
                 { "type": "enemy", "x": 1000, "y": groundY - 50},
 
-                { "type": "Reward", "x": 600, "y": groundY - 50},
-                { "type": "Reward", "x": 1000, "y": groundY - 50},
-                { "type": "Reward", "x": 1900, "y": groundY - 50},
+                { "type": "reward", "x": 600, "y": groundY - 50},
+                { "type": "reward", "x": 1000, "y": groundY - 50},
+                { "type": "reward", "x": 1900, "y": groundY - 50},
             ]
         };
         window.levelData = levelData;
@@ -52,8 +52,6 @@ var level01 = function (window) {
         }
 
         function createEnemy(x, y){
-
-        
             var enemy = game.createGameItem('enemy',25); // creating the game item and storing it in the var enemy
             var redSquare = draw.rect(50,50,'red'); // creates rectangle and stores as redSquare
             redSquare.x = -25;
@@ -80,51 +78,42 @@ var level01 = function (window) {
                 game.increaseScore(100);
                 enemy.fadeOut();
 
-        };
-
+            };
+        }
         function createReward(x, y){
-
-        
-            var Reward = game.createGameItem('Reward',25); // creating the game item and storing it in the var Reward
-            var blueSquare = draw.rect(50,50,'red'); // creates rectangle and stores as redSquare
+            var reward = game.createGameItem('reward',25); // creating the game item and storing it in the var Reward
+            var blueSquare = draw.rect(50,50,'blue'); // creates rectangle and stores as redSquare
             blueSquare.x = -25;
             blueSquare.y = -25;
-            Reward.addChild(blueSquare); // add the redSquare to the Reward game item
+            reward.addChild(blueSquare); // add the blueSquare to the Reward game item
         
-            Reward.x = x;
-            Reward.y = y;
+            reward.x = x;
+            reward.y = y;
 
-            game.addGameItem(Reward); // adds Reward to the game
+            game.addGameItem(reward); // adds Reward to the game
 
-            Reward.velocityX = -1; // this cause the Reward to move one pixel to the left on the x position
+            reward.velocityX = -1; // this cause the Reward to move one pixel to the left on the x position
 
-            Reward.rotationalVelocity = 25;
+            reward.rotationalVelocity = 25;
 
-            Reward.onPlayerCollision = function() {
+            reward.onPlayerCollision = function() {
                 console.log('The Reward has hit Halle');
                 game.changeIntegrity(+10);
             };
 
-            Reward.onProjectileCollision = function() {
-                console.log('The projectile has hit Halle');
-                game.changeIntegrity(5);
-                game.increaseScore(100);
-                Reward.fadeOut();
-
-            };
         }
-    }
+    
 
         for (var i = 0; i < levelData.gameItems.length; i++){
             var gameItem = levelData.gameItems[i];
 
-            if (gameItem.type === "sawBlade"){
+            if (gameItem.type === "sawblade"){
                 createSawBlade(gameItem.x, gameItem.y);
             } 
             if (gameItem.type === "enemy"){
                 createEnemy(gameItem.x, gameItem.y);
             } 
-            if (gameItem.type === "Reward"){
+            if (gameItem.type === "reward"){
                 createReward(gameItem.x, gameItem.y);
             } 
         }
