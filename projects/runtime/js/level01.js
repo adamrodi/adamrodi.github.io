@@ -99,6 +99,7 @@ var level01 = function (window) {
             reward.onPlayerCollision = function() {
                 console.log('The Reward has hit Halle');
                 game.changeIntegrity(+10);
+                reward.fadeOut();
             };
 
         }
