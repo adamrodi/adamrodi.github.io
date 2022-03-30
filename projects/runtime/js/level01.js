@@ -23,6 +23,13 @@ var level01 = function (window) {
                 { "type": "enemy", "x": 900, "y": groundY - 50},
                 { "type": "enemy", "x": 1500, "y": groundY - 50},
                 { "type": "enemy", "x": 2500, "y": groundY - 50},
+                { "type": "enemy", "x": 3500, "y": groundY - 50},
+                { "type": "enemy", "x": 4700, "y": groundY - 50},
+                { "type": "enemy", "x": 5900, "y": groundY - 50},
+                { "type": "enemy", "x": 6100, "y": groundY - 50},
+                { "type": "enemy", "x": 6700, "y": groundY - 50},
+                { "type": "enemy", "x": 7900, "y": groundY - 50},
+                { "type": "enemy", "x": 8200, "y": groundY - 50},
 
                 { "type": "reward", "x": 1700, "y": groundY - 50},
                 { "type": "reward", "x": 3000, "y": groundY - 50},
@@ -31,7 +38,7 @@ var level01 = function (window) {
         };
         window.levelData = levelData;
         // set this to true or false depending on if you want to see hitzones
-        game.setDebugMode(true);
+        game.setDebugMode(false);
 
         // TODO 6 and on go here
         // BEGIN EDITING YOUR CODE HERE
@@ -43,19 +50,24 @@ var level01 = function (window) {
             sawBladeHitZone.y = y; //y position of hitzone
             game.addGameItem(sawBladeHitZone);  //adds the hitzone
     
-            var obstacleImage = draw.bitmap('img/sawblade.png'); // drawing the image and storing it in the variable
+            var obstacleImage = draw.bitmap('img/fireball.png'); // drawing the image and storing it in the variable
             sawBladeHitZone.addChild(obstacleImage); // add the image to the hitzone so we can see it
             obstacleImage.x = - 25 // tweaks the image 25 pixels to the left
             obstacleImage.y = - 25 // tweaks the image 25 pixels up
-            sawBladeHitZone.rotationalVelocity = 25;
+            obstacleImage.scaleX = 0.18; //controls the x scale of the obstacle
+            obstacleImage.scaleY = 0.18; //controls the y scale of the obstacle
+            sawBladeHitZone.rotationalVelocity = 10;
 
         }
 
         function createEnemy(x, y){
             var enemy = game.createGameItem('enemy',25); // creating the game item and storing it in the var enemy
-            var redSquare = draw.rect(50,50,'red'); // creates rectangle and stores as redSquare
-            redSquare.x = -25;
-            redSquare.y = -25;
+            var redSquare = draw.bitmap('img/enemy.png'); // creates rectangle and stores as redSquare
+            redSquare.x = -25; //x position of the enemy
+            redSquare.y = -25; //y position of the enemy
+            redSquare.scaleX = 0.18; //controls the x scale of the enemy
+            redSquare.scaleY = 0.18; //controls the y scale of the enemy
+
             enemy.addChild(redSquare); // add the redSquare to the enemy game item
         
             enemy.x = x;
@@ -65,7 +77,7 @@ var level01 = function (window) {
 
             enemy.velocityX = -1; // this cause the enemy to move one pixel to the left on the x position
 
-            enemy.rotationalVelocity = 25;
+            enemy.rotationalVelocity = 0;
 
             enemy.onPlayerCollision = function() {
                 console.log('The enemy has hit Halle');
@@ -75,16 +87,18 @@ var level01 = function (window) {
             enemy.onProjectileCollision = function() {
                 console.log('The projectile has hit Halle');
                 game.changeIntegrity(5);
-                game.increaseScore(100);
+                game.increaseScore(1000);
                 enemy.fadeOut();
 
             };
         }
         function createReward(x, y){
             var reward = game.createGameItem('reward',25); // creating the game item and storing it in the var Reward
-            var blueSquare = draw.rect(50,50,'blue'); // creates rectangle and stores as redSquare
-            blueSquare.x = -25;
-            blueSquare.y = -25;
+            var blueSquare = draw.bitmap('img/rewardCoin.png'); // creates rectangle and stores as redSquare
+            blueSquare.x = -25; //x position of the reward
+            blueSquare.y = -25; //y position of the reward
+            blueSquare.scaleX = 0.1; //controls the x scale of the reward
+            blueSquare.scaleY = 0.1; //controls the y scale of the reward
             reward.addChild(blueSquare); // add the blueSquare to the Reward game item
         
             reward.x = x;
@@ -94,7 +108,7 @@ var level01 = function (window) {
 
             reward.velocityX = -1; // this cause the Reward to move one pixel to the left on the x position
 
-            reward.rotationalVelocity = 25;
+            reward.rotationalVelocity = 0;
 
             reward.onPlayerCollision = function() {
                 console.log('The Reward has hit Halle');
@@ -105,7 +119,7 @@ var level01 = function (window) {
         }
     
 
-        for (var i = 0; i < levelData.gameItems.length; i++){
+        for (var i = 0; i < levelData.gameItems.length; i++){ //iterates through the levelData object to create sawblades, enemies, and reward
             var gameItem = levelData.gameItems[i];
 
             if (gameItem.type === "sawblade"){

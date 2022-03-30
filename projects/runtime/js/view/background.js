@@ -73,9 +73,9 @@ var background = function (window) {
             // TODO 4: Part 1 - Add a tree
             tree = draw.bitmap('img/tree.png'); //reassigns the drawn image tree to the variable tree
             tree.x = canvasWidth - 300; //assigns an x value to the tree
-            tree.y = groundY - 150; //assigns a y value to the tree
-            tree.scaleX = 0.5; //changes the x scale of the tree
-            tree.scaleY = 0.5; //changes the y scale of the tree
+            tree.y = groundY - 220; //assigns a y value to the tree
+            tree.scaleX = 0.18; //changes the x scale of the tree
+            tree.scaleY = 0.18; //changes the y scale of the tree
             background.addChild(tree); //add tree to the background
             
         } // end of render function - DO NOT DELETE
