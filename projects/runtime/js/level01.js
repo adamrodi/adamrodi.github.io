@@ -46,7 +46,7 @@ var level01 = function (window) {
             //container for the sawBlade code
         function createSawBlade(x, y){
             var hitZoneSize = 25; //creates size of the hitzone
-            var damageFromObstacle = 10; //sets the damage of the obstacle
+            var damageFromObstacle = 25; //sets the damage of the obstacle
             var sawBladeHitZone = game.createObstacle(hitZoneSize, damageFromObstacle); //creates the hitzone
             sawBladeHitZone.x = x; //x position of hitzone
             sawBladeHitZone.y = y; //y position of hitzone
@@ -83,7 +83,7 @@ var level01 = function (window) {
 
             enemy.onPlayerCollision = function() {  // when the player collides with the enemy this happens
                 console.log('The enemy has hit Halle'); //prints to the console, "the enemy has hit halle" when the enemy collides with halle
-                game.changeIntegrity(-10); //takes away 10 health when the player collides with the enemy
+                game.changeIntegrity(-20); //takes away 10 health when the player collides with the enemy
             };
 
             enemy.onProjectileCollision = function() { // when the projectile collides with the enemy this happens
