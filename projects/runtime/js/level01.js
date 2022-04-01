@@ -11,6 +11,7 @@ var level01 = function (window) {
 
         // this data will allow us to define all of the
         // behavior of our game
+        //object that defines where and how many sawBlades, enemies, and rewards.
         var levelData = {
             "name": "Robot Romp",
             "number": 1, 
@@ -24,12 +25,12 @@ var level01 = function (window) {
                 { "type": "enemy", "x": 1500, "y": groundY - 50},
                 { "type": "enemy", "x": 2500, "y": groundY - 50},
                 { "type": "enemy", "x": 3500, "y": groundY - 50},
-                { "type": "enemy", "x": 4700, "y": groundY - 50},
-                { "type": "enemy", "x": 5900, "y": groundY - 50},
-                { "type": "enemy", "x": 6100, "y": groundY - 50},
+                { "type": "enemy", "x": 4100, "y": groundY - 50},
+                { "type": "enemy", "x": 4600, "y": groundY - 50},
+                { "type": "enemy", "x": 5100, "y": groundY - 50},
+                { "type": "enemy", "x": 6000, "y": groundY - 50},
                 { "type": "enemy", "x": 6700, "y": groundY - 50},
-                { "type": "enemy", "x": 7900, "y": groundY - 50},
-                { "type": "enemy", "x": 8200, "y": groundY - 50},
+                { "type": "enemy", "x": 7100, "y": groundY - 50},
 
                 { "type": "reward", "x": 1700, "y": groundY - 50},
                 { "type": "reward", "x": 3000, "y": groundY - 50},
@@ -42,6 +43,7 @@ var level01 = function (window) {
 
         // TODO 6 and on go here
         // BEGIN EDITING YOUR CODE HERE
+            //container for the sawBlade code
         function createSawBlade(x, y){
             var hitZoneSize = 25; //creates size of the hitzone
             var damageFromObstacle = 10; //sets the damage of the obstacle
@@ -56,10 +58,10 @@ var level01 = function (window) {
             obstacleImage.y = - 25 // tweaks the image 25 pixels up
             obstacleImage.scaleX = 0.18; //controls the x scale of the obstacle
             obstacleImage.scaleY = 0.18; //controls the y scale of the obstacle
-            sawBladeHitZone.rotationalVelocity = 10;
+            sawBladeHitZone.rotationalVelocity = 10; //how fast the sawblade rotates
 
         }
-
+            //container for the enemy code
         function createEnemy(x, y){
             var enemy = game.createGameItem('enemy',25); // creating the game item and storing it in the var enemy
             var redSquare = draw.bitmap('img/enemy.png'); // creates rectangle and stores as redSquare
@@ -77,21 +79,22 @@ var level01 = function (window) {
 
             enemy.velocityX = -1; // this cause the enemy to move one pixel to the left on the x position
 
-            enemy.rotationalVelocity = 0;
+            enemy.rotationalVelocity = 0; //how fast the enemy rotates
 
-            enemy.onPlayerCollision = function() {
-                console.log('The enemy has hit Halle');
-                game.changeIntegrity(-10);
+            enemy.onPlayerCollision = function() {  // when the player collides with the enemy this happens
+                console.log('The enemy has hit Halle'); //prints to the console, "the enemy has hit halle" when the enemy collides with halle
+                game.changeIntegrity(-10); //takes away 10 health when the player collides with the enemy
             };
 
-            enemy.onProjectileCollision = function() {
-                console.log('The projectile has hit Halle');
-                game.changeIntegrity(5);
-                game.increaseScore(1000);
-                enemy.fadeOut();
+            enemy.onProjectileCollision = function() { // when the projectile collides with the enemy this happens
+                console.log('The projectile has hit Halle'); //prints to the console, "the projectile has hit halle" when the enemy collides with the projectile
+                game.changeIntegrity(5); //adds 5 health when the projectile collides with the enemy
+                game.increaseScore(1000); //increases the score by 1000 when the projectile collides with the enemy
+                enemy.fadeOut(); //makes the enemy disappear when the projectile collides with the enemy
 
             };
         }
+            //container for the reward code
         function createReward(x, y){
             var reward = game.createGameItem('reward',25); // creating the game item and storing it in the var Reward
             var blueSquare = draw.bitmap('img/rewardCoin.png'); // creates rectangle and stores as redSquare
@@ -108,12 +111,13 @@ var level01 = function (window) {
 
             reward.velocityX = -1; // this cause the Reward to move one pixel to the left on the x position
 
-            reward.rotationalVelocity = 0;
+            reward.rotationalVelocity = 0; //how fast the reward rotates
 
-            reward.onPlayerCollision = function() {
-                console.log('The Reward has hit Halle');
-                game.changeIntegrity(+10);
-                reward.fadeOut();
+            reward.onPlayerCollision = function() { // when the player collides with the reward this happens
+                console.log('The Reward has hit Halle'); //prints to the console, "the Reward has hit halle" when the Reward collides with halle
+                game.changeIntegrity(10); //adds 10 health when the player collides with the reward
+                game.increaseScore(1000); //adds 1000 score when the player collides with the reward
+                reward.fadeOut(); //makes the Reward disappear when the projectile collides with the Reward
             };
 
         }
@@ -122,13 +126,13 @@ var level01 = function (window) {
         for (var i = 0; i < levelData.gameItems.length; i++){ //iterates through the levelData object to create sawblades, enemies, and reward
             var gameItem = levelData.gameItems[i];
 
-            if (gameItem.type === "sawblade"){
+            if (gameItem.type === "sawblade"){ //if gameItem is the sawBlade it creates the sawBlade at the x and y position given in the object
                 createSawBlade(gameItem.x, gameItem.y);
             } 
-            if (gameItem.type === "enemy"){
+            if (gameItem.type === "enemy"){ //if gameItem is the enemy it creates the enemy at the x and y position given in the object
                 createEnemy(gameItem.x, gameItem.y);
             } 
-            if (gameItem.type === "reward"){
+            if (gameItem.type === "reward"){ //if gameItem is the Reward it creates the Reward at the x and y position given in the object
                 createReward(gameItem.x, gameItem.y);
             } 
         }

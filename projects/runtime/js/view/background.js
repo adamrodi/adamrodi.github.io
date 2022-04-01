@@ -54,8 +54,8 @@ var background = function (window) {
             var moon = draw.bitmap('img/moon.png'); // create a var called moon. draw.bitmap draws the var and stores it in the variable
             moon.x = canvasWidth - 300; //holds the x value
             moon.y = groundY - 400; //holds the y value
-            moon.scaleX = 0.4; //changes the x scale of the moon
-            moon.scaleY = 0.4; //changes the y value of the moon
+            moon.scaleX = 1.2; //changes the x scale of the moon
+            moon.scaleY = 1.2; //changes the y value of the moon
             background.addChild(moon); //adds the moon to the background
 
 
